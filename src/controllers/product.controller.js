@@ -1,37 +1,33 @@
 const catchError = require('../utils/catchError');
-const User = require('../models/User');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
+const Product = require('../models/Product');
 
 const getAll = catchError(async(req, res) => {
-    const results = await User.findAll();
+    const results = await Product.findAll();
     return res.json(results);
 });
 
 const create = catchError(async(req, res) => {
-    const result = await User.create(req.body);
+    const result = await Product.create(req.body);
     return res.status(201).json(result);
 });
 
 const getOne = catchError(async(req, res) => {
     const { id } = req.params;
-    const result = await User.findByPk(id);
+    const result = await Product.findByPk(id);
     if(!result) return res.sendStatus(404);
     return res.json(result);
 });
 
 const remove = catchError(async(req, res) => {
     const { id } = req.params;
-    const result = await User.destroy({ where: {id} });
+    const result = await Product.destroy({ where: {id} });
     if(!result) return res.sendStatus(404);
     return res.sendStatus(204);
 });
 
 const update = catchError(async(req, res) => {
     const { id } = req.params;
-    delete req.body.password
-    delete req.body.email
-    const result = await User.update(
+    const result = await Product.update(
         req.body,
         { where: {id}, returning: true }
     );
@@ -39,18 +35,13 @@ const update = catchError(async(req, res) => {
     return res.json(result[1][0]);
 });
 
-const login=catchError(async(req,res)=>{
-    const {email,password}=req.body
-    const user=await User.findOne({where:{email}})
-    if(!user) return res.sendStatus(401)
-    const isValid=await bcrypt.compare(password,user.password)
-    if(!isValid) return res.sendStatus(401)
-    const token = jwt.sign(
-		{user}, 
-		process.env.TOKEN_SECRET,
-		{ expiresIn: '1d' } 
-    )
-    return res.json({user,token})
+const setImage=catchError(async(req,res)=>{
+    const {id}=req.params
+    const product= await Product.findByPk(id)
+    if(!product) return res.sendStatus(404)
+    await product.setProductImgs(req.body)
+    const images=await getProductImgs()
+    return res.json(images)
 })
 
 module.exports = {
@@ -59,5 +50,5 @@ module.exports = {
     getOne,
     remove,
     update,
-    login
+    setImage
 }
