@@ -7,13 +7,14 @@ const Product = sequelize.define('product', {
         allowNull: false
     },
     description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false
     },
     price: {
-        type: DataTypes.STRING,
+        type: DataTypes.DECIMAL,
         allowNull: false
-    }
+    },
+    // categoryId
 });
 
 module.exports = Product;
