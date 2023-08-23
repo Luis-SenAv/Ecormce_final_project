@@ -9,7 +9,8 @@ const ProducImg = sequelize.define('producImg', {
     filename: {
         type: DataTypes.STRING,
         allowNull: false
-    }
+    },
+    // ProductId
 });
 
 module.exports = ProducImg;

@@ -9,8 +9,10 @@ require('../models')
 
 Product.belongsTo(Category)
 Category.hasMany(Product)
-Product.belongsToMany(ProducImg,{through:'ProductsProductImgs'})
+
+
 ProducImg.belongsTo(Product)
+Product.hasMany(ProducImg)
 
 // Cart--> userId
 Cart.belongsTo(User)

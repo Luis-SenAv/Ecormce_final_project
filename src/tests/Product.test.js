@@ -1,7 +1,7 @@
 const app =require('../app')
 const request=require('supertest')
 const Category = require('../models/Category')
-
+require('../models')
 
 let token
 let productId
