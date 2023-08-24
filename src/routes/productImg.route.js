@@ -1,4 +1,5 @@
-const { getAll, create, remove } = require('../controllers/productImg.controller');
+const { getAll} = require('../controllers/productImg.controller');
+const { create, remove } = require('../controllers/productImgClaudinary.controller');
 const express = require('express');
 const { verifyJWT } = require('../utils/verifyJWT');
 const upload = require('../utils/multer');

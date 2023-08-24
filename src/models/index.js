@@ -12,7 +12,7 @@ Category.hasMany(Product)
 
 
 ProducImg.belongsTo(Product)
-Product.hasMany(ProducImg)
+Product.hasMany(ProducImg)  
 
 // Cart--> userId
 Cart.belongsTo(User)
