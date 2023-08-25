@@ -1,6 +1,7 @@
 const catchError = require('../utils/catchError');
 const Product = require('../models/Product');
 const Category = require('../models/Category');
+require('../models')
 
 const getAll = catchError(async(req, res) => {
     const {category}=req.query
