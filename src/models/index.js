@@ -4,7 +4,6 @@ const Product = require("./Product");
 const ProducImg = require("./ProductImg");
 const Purchase = require("./Purchase");
 const User = require("./User");
-require('../models')
 
 
 Product.belongsTo(Category)
